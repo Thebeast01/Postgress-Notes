@@ -168,3 +168,30 @@ This would return:
 | Alice | HR |
 
 Joins are powerful tools in SQL that allow you to retrieve related data from multiple tables in a single query.
+
+## Snytax of Linking two table with each other 
+```` postgresql 
+
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE addresses (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL,
+    city VARCHAR(50) UNIQUE NOT NULL,
+    country VARCHAR(255) UNIQUE NOT NULL,
+    street VARCHAR(255) NOT NULL,
+    pincode VARCHAR(50),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+    FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE
+    
+);
+
+````
+
+
